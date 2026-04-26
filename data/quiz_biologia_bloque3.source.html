@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<!-- Seed source file (incluye respuestas correctas). No se sirve desde /public. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen de Biología - Bloque III</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef3f9;
+      color: #1f2937;
+      line-height: 1.5;
+    }
+
+    .banner {
+      background: linear-gradient(135deg, #174a8b, #0f2d5c);
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      border-bottom: 6px solid #76b7ff;
+    }
+
+    .banner .bloque {
+      letter-spacing: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .banner h1 {
+      margin: 0;
+      font-size: 30px;
+      text-transform: uppercase;
+    }
+
+    .banner p {
+      margin: 10px auto 0;
+      max-width: 900px;
+      font-size: 16px;
+    }
+
+    .contenedor {
+      max-width: 1000px;
+      margin: 25px auto;
+      padding: 0 16px 40px;
+    }
+
+    .tarjeta {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 22px rgba(15, 45, 92, 0.12);
+      margin-bottom: 20px;
+    }
+
+    .datos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .campo label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #174a8b;
+    }
+
+    .campo input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .instrucciones {
+      border-left: 6px solid #174a8b;
+    }
+
+    .instrucciones h2,
+    .seccion h2 {
+      margin-top: 0;
+      color: #174a8b;
+    }
+
+    .pregunta {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 14px rgba(15, 45, 92, 0.08);
+      border: 2px solid transparent;
+    }
+
+    .pregunta h3 {
+      margin-top: 0;
+      color: #0f2d5c;
+      font-size: 18px;
+    }
+
+    .opciones {
+      display: grid;
+      gap: 9px;
+    }
+
+    .opcion {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px;
+      border: 1px solid #d8e1ee;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fbfdff;
+    }
+
+    .opcion:hover {
+      background: #edf6ff;
+    }
+
+    .opcion input {
+      margin-top: 4px;
+    }
+
+    .acciones {
+      position: sticky;
+      bottom: 0;
+      background: rgba(238, 243, 249, 0.95);
+      backdrop-filter: blur(6px);
+      padding: 16px;
+      border-top: 1px solid #cbd5e1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    button {
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-principal {
+      background: #174a8b;
+      color: white;
+    }
+
+    .btn-secundario {
+      background: #dbeafe;
+      color: #174a8b;
+    }
+
+    .btn-imprimir {
+      background: #0f766e;
+      color: white;
+    }
+
+    #resultado {
+      display: none;
+      text-align: center;
+      border: 3px solid #174a8b;
+    }
+
+    #resultado h2 {
+      color: #174a8b;
+      margin-bottom: 10px;
+    }
+
+    .puntaje {
+      font-size: 34px;
+      font-weight: bold;
+      color: #0f2d5c;
+      margin: 8px 0;
+    }
+
+    .correcta {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .incorrecta {
+      border-color: #dc2626;
+      background: #fef2f2;
+    }
+
+    .sin-responder {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .retro {
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+
+    .texto-correcto {
+      color: #15803d;
+    }
+
+    .texto-incorrecto {
+      color: #b91c1c;
+    }
+
+    .texto-pendiente {
+      color: #b45309;
+    }
+
+    .clave {
+      display: none;
+      font-size: 14px;
+      columns: 3;
+      column-gap: 30px;
+    }
+
+    .clave p {
+      margin: 4px 0;
+    }
+
+    @media (max-width: 760px) {
+      .banner h1 {
+        font-size: 22px;
+      }
+
+      .datos {
+        grid-template-columns: 1fr;
+      }
+
+      .clave {
+        columns: 2;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .acciones {
+        display: none;
+      }
+
+      .pregunta {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+      }
+
+      .tarjeta {
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="banner">
+    <div class="bloque">BLOQUE III</div>
+    <h1>Lo que nos hace estar vivos</h1>
+    <p>Células, ADN y procesos vitales</p>
+  </header>
+
+  <main class="contenedor">
+    <section class="tarjeta">
+      <div class="datos">
+        <div class="campo">
+          <label for="alumno">Alumno</label>
+          <input type="text" id="alumno" placeholder="Nombre del alumno">
+        </div>
+        <div class="campo">
+          <label for="grado">Grado</label>
+          <input type="text" id="grado" value="1.º de secundaria">
+        </div>
+        <div class="campo">
+          <label for="fecha">Fecha</label>
+          <input type="date" id="fecha">
+        </div>
+      </div>
+    </section>
+
+    <section class="tarjeta instrucciones">
+      <h2>Instrucciones</h2>
+      <p>Lee con atención cada pregunta y selecciona una sola respuesta. Al finalizar, presiona el botón <strong>Calificar examen</strong>.</p>
+      <p><strong>Total:</strong> 30 preguntas &nbsp; | &nbsp; <strong>Nivel:</strong> Medio &nbsp; | &nbsp; <strong>Materia:</strong> Biología</p>
+    </section>
+
+    <section class="tarjeta seccion">
+      <h2>Examen</h2>
+    </section>
+
+    <form id="formExamen">
+      
+      <section class="pregunta" id="pregunta-1" data-respuesta="B">
+        <h3>1. ¿Cuál es la unidad básica de todos los seres vivos?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p1" value="A">
+            <span><strong>A)</strong> El átomo</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p1" value="B">
+            <span><strong>B)</strong> La célula</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p1" value="C">
+            <span><strong>C)</strong> El tejido</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p1" value="D">
+            <span><strong>D)</strong> El órgano</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-1"></p>
+      </section>
+      <section class="pregunta" id="pregunta-2" data-respuesta="C">
+        <h3>2. ¿Qué estructura celular controla la entrada y salida de sustancias en la célula?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p2" value="A">
+            <span><strong>A)</strong> Núcleo</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p2" value="B">
+            <span><strong>B)</strong> Mitocondria</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p2" value="C">
+            <span><strong>C)</strong> Membrana celular</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p2" value="D">
+            <span><strong>D)</strong> Ribosoma</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-2"></p>
+      </section>
+      <section class="pregunta" id="pregunta-3" data-respuesta="B">
+        <h3>3. ¿Cuál es la función principal del núcleo celular?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p3" value="A">
+            <span><strong>A)</strong> Producir energía</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p3" value="B">
+            <span><strong>B)</strong> Guardar la información genética</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p3" value="C">
+            <span><strong>C)</strong> Digerir sustancias</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p3" value="D">
+            <span><strong>D)</strong> Producir movimiento</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-3"></p>
+      </section>
+      <section class="pregunta" id="pregunta-4" data-respuesta="A">
+        <h3>4. ¿Qué organelo es conocido como la “central de energía” de la célula?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p4" value="A">
+            <span><strong>A)</strong> Mitocondria</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p4" value="B">
+            <span><strong>B)</strong> Vacuola</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p4" value="C">
+            <span><strong>C)</strong> Lisosoma</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p4" value="D">
+            <span><strong>D)</strong> Aparato de Golgi</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-4"></p>
+      </section>
+      <section class="pregunta" id="pregunta-5" data-respuesta="C">
+        <h3>5. ¿Cuál de las siguientes estructuras se encuentra principalmente en células vegetales y no en células animales?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p5" value="A">
+            <span><strong>A)</strong> Núcleo</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p5" value="B">
+            <span><strong>B)</strong> Mitocondria</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p5" value="C">
+            <span><strong>C)</strong> Cloroplasto</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p5" value="D">
+            <span><strong>D)</strong> Membrana celular</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-5"></p>
+      </section>
+      <section class="pregunta" id="pregunta-6" data-respuesta="B">
+        <h3>6. Una diferencia importante entre célula animal y célula vegetal es que la célula vegetal tiene:</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p6" value="A">
+            <span><strong>A)</strong> ADN y núcleo</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p6" value="B">
+            <span><strong>B)</strong> Pared celular y cloroplastos</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p6" value="C">
+            <span><strong>C)</strong> Membrana celular y citoplasma</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p6" value="D">
+            <span><strong>D)</strong> Ribosomas y mitocondrias</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-6"></p>
+      </section>
+      <section class="pregunta" id="pregunta-7" data-respuesta="C">
+        <h3>7. ¿Qué proceso realizan las plantas para producir su propio alimento?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p7" value="A">
+            <span><strong>A)</strong> Digestión</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p7" value="B">
+            <span><strong>B)</strong> Respiración celular</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p7" value="C">
+            <span><strong>C)</strong> Fotosíntesis</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p7" value="D">
+            <span><strong>D)</strong> Mitosis</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-7"></p>
+      </section>
+      <section class="pregunta" id="pregunta-8" data-respuesta="B">
+        <h3>8. ¿Qué necesita una planta para realizar la fotosíntesis?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p8" value="A">
+            <span><strong>A)</strong> Oxígeno, azúcar y oscuridad</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p8" value="B">
+            <span><strong>B)</strong> Agua, dióxido de carbono y luz solar</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p8" value="C">
+            <span><strong>C)</strong> Proteínas, grasa y sal</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p8" value="D">
+            <span><strong>D)</strong> ADN, cromosomas y mitosis</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-8"></p>
+      </section>
+      <section class="pregunta" id="pregunta-9" data-respuesta="A">
+        <h3>9. ¿Qué productos se obtienen principalmente de la fotosíntesis?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p9" value="A">
+            <span><strong>A)</strong> Azúcar y oxígeno</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p9" value="B">
+            <span><strong>B)</strong> Agua y dióxido de carbono</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p9" value="C">
+            <span><strong>C)</strong> Proteínas y minerales</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p9" value="D">
+            <span><strong>D)</strong> Energía eléctrica y calor</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-9"></p>
+      </section>
+      <section class="pregunta" id="pregunta-10" data-respuesta="C">
+        <h3>10. ¿En qué organelo ocurre principalmente la fotosíntesis?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p10" value="A">
+            <span><strong>A)</strong> Mitocondria</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p10" value="B">
+            <span><strong>B)</strong> Núcleo</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p10" value="C">
+            <span><strong>C)</strong> Cloroplasto</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p10" value="D">
+            <span><strong>D)</strong> Ribosoma</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-10"></p>
+      </section>
+      <section class="pregunta" id="pregunta-11" data-respuesta="B">
+        <h3>11. ¿Cuál es el objetivo principal de la respiración celular?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p11" value="A">
+            <span><strong>A)</strong> Producir alimento usando luz solar</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p11" value="B">
+            <span><strong>B)</strong> Obtener energía a partir de los alimentos</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p11" value="C">
+            <span><strong>C)</strong> Formar cromosomas</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p11" value="D">
+            <span><strong>D)</strong> Dividir el núcleo celular</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-11"></p>
+      </section>
+      <section class="pregunta" id="pregunta-12" data-respuesta="A">
+        <h3>12. ¿En qué organelo ocurre gran parte de la respiración celular?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p12" value="A">
+            <span><strong>A)</strong> Mitocondria</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p12" value="B">
+            <span><strong>B)</strong> Cloroplasto</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p12" value="C">
+            <span><strong>C)</strong> Vacuola</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p12" value="D">
+            <span><strong>D)</strong> Pared celular</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-12"></p>
+      </section>
+      <section class="pregunta" id="pregunta-13" data-respuesta="B">
+        <h3>13. ¿Cuál afirmación compara correctamente fotosíntesis y respiración celular?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p13" value="A">
+            <span><strong>A)</strong> Ambas solo ocurren en animales</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p13" value="B">
+            <span><strong>B)</strong> La fotosíntesis produce azúcar y la respiración usa azúcar para obtener energía</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p13" value="C">
+            <span><strong>C)</strong> La respiración celular produce luz solar</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p13" value="D">
+            <span><strong>D)</strong> La fotosíntesis destruye el ADN</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-13"></p>
+      </section>
+      <section class="pregunta" id="pregunta-14" data-respuesta="B">
+        <h3>14. En una pecera con plantas y peces, ¿qué gas liberan principalmente los peces al respirar?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p14" value="A">
+            <span><strong>A)</strong> Oxígeno</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p14" value="B">
+            <span><strong>B)</strong> Dióxido de carbono</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p14" value="C">
+            <span><strong>C)</strong> Nitrógeno</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p14" value="D">
+            <span><strong>D)</strong> Hidrógeno</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-14"></p>
+      </section>
+      <section class="pregunta" id="pregunta-15" data-respuesta="B">
+        <h3>15. ¿Qué molécula contiene la información hereditaria de los seres vivos?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p15" value="A">
+            <span><strong>A)</strong> Agua</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p15" value="B">
+            <span><strong>B)</strong> ADN</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p15" value="C">
+            <span><strong>C)</strong> Oxígeno</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p15" value="D">
+            <span><strong>D)</strong> Glucosa</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-15"></p>
+      </section>
+      <section class="pregunta" id="pregunta-16" data-respuesta="C">
+        <h3>16. ¿Cuál es la forma más conocida del ADN?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p16" value="A">
+            <span><strong>A)</strong> Esfera</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p16" value="B">
+            <span><strong>B)</strong> Cubo</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p16" value="C">
+            <span><strong>C)</strong> Doble hélice</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p16" value="D">
+            <span><strong>D)</strong> Línea recta</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-16"></p>
+      </section>
+      <section class="pregunta" id="pregunta-17" data-respuesta="A">
+        <h3>17. ¿Qué es un gen?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p17" value="A">
+            <span><strong>A)</strong> Una parte del ADN que contiene información para una característica</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p17" value="B">
+            <span><strong>B)</strong> Una célula completa</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p17" value="C">
+            <span><strong>C)</strong> Un tipo de organelo que produce energía</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p17" value="D">
+            <span><strong>D)</strong> Una sustancia que destruye cromosomas</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-17"></p>
+      </section>
+      <section class="pregunta" id="pregunta-18" data-respuesta="A">
+        <h3>18. ¿Qué son los cromosomas?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p18" value="A">
+            <span><strong>A)</strong> Estructuras formadas por ADN que contienen genes</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p18" value="B">
+            <span><strong>B)</strong> Gases que usan las plantas</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p18" value="C">
+            <span><strong>C)</strong> Organelos que digieren alimentos</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p18" value="D">
+            <span><strong>D)</strong> Moléculas que solo existen en bacterias</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-18"></p>
+      </section>
+      <section class="pregunta" id="pregunta-19" data-respuesta="C">
+        <h3>19. En los seres humanos, la mayoría de las células del cuerpo tienen:</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p19" value="A">
+            <span><strong>A)</strong> 10 cromosomas</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p19" value="B">
+            <span><strong>B)</strong> 23 cromosomas</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p19" value="C">
+            <span><strong>C)</strong> 46 cromosomas</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p19" value="D">
+            <span><strong>D)</strong> 100 cromosomas</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-19"></p>
+      </section>
+      <section class="pregunta" id="pregunta-20" data-respuesta="B">
+        <h3>20. ¿Cuál es la relación correcta entre ADN, genes y cromosomas?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p20" value="A">
+            <span><strong>A)</strong> Los genes contienen cromosomas y los cromosomas contienen células</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p20" value="B">
+            <span><strong>B)</strong> El ADN forma cromosomas y los genes son segmentos de ADN</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p20" value="C">
+            <span><strong>C)</strong> Los cromosomas producen luz y el ADN produce oxígeno</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p20" value="D">
+            <span><strong>D)</strong> Los genes son organelos de la mitocondria</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-20"></p>
+      </section>
+      <section class="pregunta" id="pregunta-21" data-respuesta="B">
+        <h3>21. ¿Cuál es la función principal de la mitosis?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p21" value="A">
+            <span><strong>A)</strong> Producir células sexuales</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p21" value="B">
+            <span><strong>B)</strong> Formar dos células hijas iguales</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p21" value="C">
+            <span><strong>C)</strong> Reducir el número de cromosomas a la mitad</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p21" value="D">
+            <span><strong>D)</strong> Producir oxígeno</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-21"></p>
+      </section>
+      <section class="pregunta" id="pregunta-22" data-respuesta="A">
+        <h3>22. La mitosis es importante para:</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p22" value="A">
+            <span><strong>A)</strong> Crecimiento y reparación de tejidos</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p22" value="B">
+            <span><strong>B)</strong> Producir luz solar</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p22" value="C">
+            <span><strong>C)</strong> Destruir células sanas</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p22" value="D">
+            <span><strong>D)</strong> Convertir plantas en animales</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-22"></p>
+      </section>
+      <section class="pregunta" id="pregunta-23" data-respuesta="A">
+        <h3>23. ¿Qué ocurre antes de que una célula se divida?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p23" value="A">
+            <span><strong>A)</strong> El ADN se duplica</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p23" value="B">
+            <span><strong>B)</strong> El núcleo desaparece para siempre</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p23" value="C">
+            <span><strong>C)</strong> La célula pierde toda su energía</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p23" value="D">
+            <span><strong>D)</strong> Los cromosomas se convierten en agua</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-23"></p>
+      </section>
+      <section class="pregunta" id="pregunta-24" data-respuesta="C">
+        <h3>24. ¿Qué tipo de división celular produce gametos, como óvulos y espermatozoides?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p24" value="A">
+            <span><strong>A)</strong> Fotosíntesis</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p24" value="B">
+            <span><strong>B)</strong> Respiración celular</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p24" value="C">
+            <span><strong>C)</strong> Meiosis</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p24" value="D">
+            <span><strong>D)</strong> Digestión</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-24"></p>
+      </section>
+      <section class="pregunta" id="pregunta-25" data-respuesta="A">
+        <h3>25. ¿Cuál es una diferencia correcta entre mitosis y meiosis?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p25" value="A">
+            <span><strong>A)</strong> La mitosis produce células iguales; la meiosis produce células sexuales con la mitad de cromosomas</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p25" value="B">
+            <span><strong>B)</strong> La mitosis solo ocurre en plantas; la meiosis solo en bacterias</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p25" value="C">
+            <span><strong>C)</strong> La meiosis produce oxígeno; la mitosis produce dióxido de carbono</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p25" value="D">
+            <span><strong>D)</strong> Ambas destruyen el ADN</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-25"></p>
+      </section>
+      <section class="pregunta" id="pregunta-26" data-respuesta="A">
+        <h3>26. ¿Por qué la meiosis es importante para la reproducción sexual?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p26" value="A">
+            <span><strong>A)</strong> Porque permite formar células sexuales con la mitad de la información genética</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p26" value="B">
+            <span><strong>B)</strong> Porque evita que exista variación genética</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p26" value="C">
+            <span><strong>C)</strong> Porque produce cloroplastos</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p26" value="D">
+            <span><strong>D)</strong> Porque convierte energía en azúcar</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-26"></p>
+      </section>
+      <section class="pregunta" id="pregunta-27" data-respuesta="A">
+        <h3>27. Si una célula necesita mucha energía para funcionar, ¿qué organelo debería tener en gran cantidad?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p27" value="A">
+            <span><strong>A)</strong> Mitocondrias</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p27" value="B">
+            <span><strong>B)</strong> Pared celular</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p27" value="C">
+            <span><strong>C)</strong> Vacuolas vacías</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p27" value="D">
+            <span><strong>D)</strong> Cromosomas rotos</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-27"></p>
+      </section>
+      <section class="pregunta" id="pregunta-28" data-respuesta="B">
+        <h3>28. ¿Qué pasaría si una planta no recibiera luz solar suficiente durante mucho tiempo?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p28" value="A">
+            <span><strong>A)</strong> Haría más fotosíntesis</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p28" value="B">
+            <span><strong>B)</strong> Tendría dificultad para producir alimento</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p28" value="C">
+            <span><strong>C)</strong> Produciría más ADN</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p28" value="D">
+            <span><strong>D)</strong> Dejaría de tener células</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-28"></p>
+      </section>
+      <section class="pregunta" id="pregunta-29" data-respuesta="A">
+        <h3>29. ¿Cuál ejemplo representa mejor una función vital de los seres vivos?</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p29" value="A">
+            <span><strong>A)</strong> Crecer, obtener energía y reproducirse</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p29" value="B">
+            <span><strong>B)</strong> Brillar como una lámpara</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p29" value="C">
+            <span><strong>C)</strong> Convertirse en roca</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p29" value="D">
+            <span><strong>D)</strong> No cambiar nunca</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-29"></p>
+      </section>
+      <section class="pregunta" id="pregunta-30" data-respuesta="A">
+        <h3>30. Una célula vegetal tiene cloroplastos porque necesita:</h3>
+        <div class="opciones">
+          
+          <label class="opcion">
+            <input type="radio" name="p30" value="A">
+            <span><strong>A)</strong> Realizar fotosíntesis</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p30" value="B">
+            <span><strong>B)</strong> Hacer mitosis más rápido</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p30" value="C">
+            <span><strong>C)</strong> Eliminar todo su ADN</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="p30" value="D">
+            <span><strong>D)</strong> Evitar la respiración celular</span>
+          </label>
+        </div>
+        <p class="retro" id="retro-30"></p>
+      </section>
+    </form>
+
+    <section id="resultado" class="tarjeta">
+      <h2>Resultado del examen</h2>
+      <p id="nombreResultado"></p>
+      <div class="puntaje" id="puntaje"></div>
+      <p id="mensaje"></p>
+    </section>
+
+    <section class="tarjeta clave" id="clave">
+      <h2>Clave de respuestas</h2>
+      <p>1. B</p><p>2. C</p><p>3. B</p><p>4. A</p><p>5. C</p><p>6. B</p><p>7. C</p><p>8. B</p><p>9. A</p><p>10. C</p><p>11. B</p><p>12. A</p><p>13. B</p><p>14. B</p><p>15. B</p><p>16. C</p><p>17. A</p><p>18. A</p><p>19. C</p><p>20. B</p><p>21. B</p><p>22. A</p><p>23. A</p><p>24. C</p><p>25. A</p><p>26. A</p><p>27. A</p><p>28. B</p><p>29. A</p><p>30. A</p>
+    </section>
+  </main>
+
+  <div class="acciones">
+    <button type="button" class="btn-principal" onclick="calificar()">Calificar examen</button>
+    <button type="button" class="btn-secundario" onclick="limpiar()">Limpiar respuestas</button>
+    <button type="button" class="btn-secundario" onclick="mostrarClave()">Mostrar / ocultar clave</button>
+    <button type="button" class="btn-imprimir" onclick="window.print()">Imprimir</button>
+  </div>
+
+  <script>
+    const respuestas = {
+    p1: "B",
+    p2: "C",
+    p3: "B",
+    p4: "A",
+    p5: "C",
+    p6: "B",
+    p7: "C",
+    p8: "B",
+    p9: "A",
+    p10: "C",
+    p11: "B",
+    p12: "A",
+    p13: "B",
+    p14: "B",
+    p15: "B",
+    p16: "C",
+    p17: "A",
+    p18: "A",
+    p19: "C",
+    p20: "B",
+    p21: "B",
+    p22: "A",
+    p23: "A",
+    p24: "C",
+    p25: "A",
+    p26: "A",
+    p27: "A",
+    p28: "B",
+    p29: "A",
+    p30: "A"
+  };
+
+    document.getElementById("fecha").valueAsDate = new Date();
+
+    function calificar() {
+      let correctas = 0;
+      let respondidas = 0;
+      const total = Object.keys(respuestas).length;
+
+      for (let i = 1; i <= total; i++) {
+        const pregunta = document.getElementById(`pregunta-${i}`);
+        const retro = document.getElementById(`retro-${i}`);
+        const seleccionada = document.querySelector(`input[name="p${i}"]:checked`);
+        const correcta = respuestas[`p${i}`];
+
+        pregunta.classList.remove("correcta", "incorrecta", "sin-responder");
+        retro.className = "retro";
+
+        if (!seleccionada) {
+          pregunta.classList.add("sin-responder");
+          retro.textContent = "Sin responder.";
+          retro.classList.add("texto-pendiente");
+          continue;
+        }
+
+        respondidas++;
+
+        if (seleccionada.value === correcta) {
+          correctas++;
+          pregunta.classList.add("correcta");
+          retro.textContent = "Correcta.";
+          retro.classList.add("texto-correcto");
+        } else {
+          pregunta.classList.add("incorrecta");
+          retro.textContent = `Incorrecta. Respuesta correcta: ${correcta}.`;
+          retro.classList.add("texto-incorrecto");
+        }
+      }
+
+      const porcentaje = Math.round((correctas / total) * 100);
+      const calificacion10 = ((correctas / total) * 10).toFixed(1);
+      const alumno = document.getElementById("alumno").value.trim();
+
+      document.getElementById("resultado").style.display = "block";
+      document.getElementById("nombreResultado").textContent = alumno ? `Alumno: ${alumno}` : "";
+      document.getElementById("puntaje").textContent = `${correctas} de ${total} correctas`;
+      document.getElementById("mensaje").textContent =
+        `Respondidas: ${respondidas} de ${total} | Porcentaje: ${porcentaje}% | Calificación: ${calificacion10} / 10`;
+
+      document.getElementById("resultado").scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function limpiar() {
+      document.getElementById("formExamen").reset();
+      document.getElementById("resultado").style.display = "none";
+
+      document.querySelectorAll(".pregunta").forEach(p => {
+        p.classList.remove("correcta", "incorrecta", "sin-responder");
+      });
+
+      document.querySelectorAll(".retro").forEach(r => {
+        r.textContent = "";
+        r.className = "retro";
+      });
+    }
+
+    function mostrarClave() {
+      const clave = document.getElementById("clave");
+      clave.style.display = clave.style.display === "block" ? "none" : "block";
+    }
+  </script>
+
+</body>
+</html>

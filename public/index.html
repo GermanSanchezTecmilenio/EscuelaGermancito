@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen</title>
+  <link rel="stylesheet" href="/quiz.css">
+  <script defer src="/quiz.js"></script>
+</head>
+  <body>
+    <header class="banner banner--exam">
+      <div class="banner__inner">
+        <div class="banner__top">
+          <div class="banner__actions banner__actions--stack">
+            <button class="banner-btn" id="themeToggle" type="button" aria-label="Cambiar tema">
+              <svg class="banner-btn__icon icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="M4.93 4.93l1.41 1.41"></path>
+                <path d="M17.66 17.66l1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="M6.34 17.66l-1.41 1.41"></path>
+                <path d="M19.07 4.93l-1.41 1.41"></path>
+              </svg>
+              <svg class="banner-btn__icon icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path>
+              </svg>
+              <span class="banner-btn__text"></span>
+            </button>
+            <a class="banner-btn" href="/resumen.html" title="Abrir resumen del examen">
+              <svg class="banner-btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <path d="M14 2v6h6"></path>
+                <path d="M16 13H8"></path>
+                <path d="M16 17H8"></path>
+                <path d="M10 9H8"></path>
+              </svg>
+              <span class="banner-btn__text">Resumen</span>
+            </a>
+          </div>
+        </div>
+        <div class="banner__content">
+          <h1 id="quizTitle">Cargando examen…</h1>
+          <p id="quizDesc">Conectando con el servidor.</p>
+          <p id="quizMeta" class="muted"></p>
+        </div>
+      </div>
+    </header>
+
+  <main class="container">
+    <section class="card">
+      <h2 class="card__title">Datos del alumno</h2>
+      <div class="grid">
+        <label class="field">
+          <span class="field__label">Alumno</span>
+          <input class="field__input" type="text" id="alumno" placeholder="Nombre del alumno">
+        </label>
+
+        <label class="field">
+          <span class="field__label">Grado</span>
+          <input class="field__input" type="text" id="grado" value="1.º de secundaria">
+        </label>
+
+        <label class="field">
+          <span class="field__label">Fecha</span>
+          <input class="field__input" type="date" id="fecha">
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">Actualizar examen</h2>
+      <p class="muted">Para reemplazar el examen, carga un archivo de <strong>Word (.docx)</strong>.</p>
+      <p class="muted"><strong>Prompt sugerido:</strong> Convierte el examen a archivo Word con el formato solicitado:<br>Pregunta | A | B | C | D | Correcta<br>La columna Correcta contiene solo letras A-D</p>
+
+      <div class="grid grid--import">
+        <label class="field">
+          <span class="field__label">Archivo (Word)</span>
+          <input class="field__input" type="file" id="quizFile" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        </label>
+
+        <button class="btn btn--primary" type="button" id="btnImport" disabled>Actualizar examen</button>
+      </div>
+      <p id="importStatus" class="muted" style="margin-top:10px"></p>
+    </section>
+
+    <section class="card">
+      <div id="flash" class="flash" hidden></div>
+      <form id="quizForm">
+        <div id="questions" class="questions"></div>
+
+        <div class="actions">
+          <button class="btn btn--primary" type="submit">Calificar examen</button>
+          <button class="btn" type="button" id="btnClear" title="Volver a Practicar">Volver a Practicar</button>
+          <button class="btn" type="button" id="btnHistory" title="Ver historial de calificaciones">Historial</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="resultado" class="card" hidden>
+      <h2 class="card__title">Resultado</h2>
+      <div class="result">
+        <div id="nombreResultado" class="result__name"></div>
+        <div id="puntaje" class="result__score"></div>
+        <div id="mensaje" class="result__meta"></div>
+        <div class="result__footer">
+          <div id="folio" class="result__folio"></div>
+          <div id="tiempo" class="result__folio"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="historial" class="card" hidden>
+      <h2 class="card__title">Historial</h2>
+      <div id="historialBody" class="muted">Cargando…</div>
+    </section>
+  </main>
+</body>
+</html>

@@ -18,8 +18,8 @@ La app usa **solo** la base de datos `germancito` (no se usa `employees`).
 - Historial:
   - Visualiza calificaciones anteriores con **fecha y hora**.
 - Actualizar examen:
-  - Carga un archivo de Excel (`.xlsx`) o Word (`.docx`) para reemplazar el examen.
-  - Formato requerido (encabezados): `Pregunta`, `A`, `B`, `C`, `D`, `Correcta` (letra A-D).
+  - Para reemplazar el examen, carga un archivo de Word (`.docx`).
+  - Prompt sugerido: `Convierte el examen a archivo Word con el formato solicitado: Pregunta | A | B | C | D | Correcta. La columna Correcta contiene solo letras A-D`.
 
 ## Requisitos
 
@@ -42,8 +42,12 @@ Variables de entorno (opcionales):
 - `DB_USER` (default `root`)
 - `DB_PASSWORD` (default `1234`)
 - `DB_APP_NAME` (default `germancito`)
-- `OPENAI_API_KEY` (opcional, para explicaciones tipo ChatGPT)
+- `OPENAI_API_KEY` (opcional, para explicaciones tipo ChatGPT/OpenAI)
 - `OPENAI_MODEL` (default `gpt-4o-mini`)
+- `WEB_EXPLANATIONS` (default `1`): genera explicaciones gratis usando Wikipedia si OpenAI no está configurado
+- `WEB_EXPLANATIONS_LANG` (default `es`)
+- `WEB_EXPLANATIONS_MAX_QUESTIONS` (default `25`)
+- `WEB_EXPLANATIONS_BATCH_SIZE` (default `4`)
 
 ### Opción A: `.env` (recomendado)
 

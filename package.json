@@ -1,0 +1,30 @@
+{
+  "name": "proyectorhmysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "db:reset": "node scripts/reset-db.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^16.6.0",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "fast-xml-parser": "^5.2.5",
+    "jszip": "^3.10.1",
+    "mammoth": "^1.10.0",
+    "mysql2": "^3.20.0",
+    "multer": "^2.0.0",
+    "node-html-parser": "^7.0.1"
+  },
+  "overrides": {
+    "uuid": "^14.0.0"
+  }
+}

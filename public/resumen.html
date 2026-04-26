@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumen del examen</title>
+  <link rel="stylesheet" href="/quiz.css">
+  <script defer src="/resumen.js"></script>
+</head>
+<body>
+  <header class="banner banner--summary">
+    <div class="banner__inner">
+      <div class="banner__top">
+        <div class="banner__actions">
+          <a class="banner-btn" href="/" title="Volver al examen">
+            <svg class="banner-btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"></path>
+              <path d="M21 12H9"></path>
+            </svg>
+            <span class="banner-btn__text">Volver al examen</span>
+          </a>
+          <button class="banner-btn" id="themeToggle" type="button" aria-label="Cambiar tema">
+            <svg class="banner-btn__icon icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="M4.93 4.93l1.41 1.41"></path>
+              <path d="M17.66 17.66l1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="M6.34 17.66l-1.41 1.41"></path>
+              <path d="M19.07 4.93l-1.41 1.41"></path>
+            </svg>
+            <svg class="banner-btn__icon icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path>
+            </svg>
+            <span class="banner-btn__text"></span>
+          </button>
+        </div>
+      </div>
+      <div class="banner__content">
+        <div class="banner__kicker">MATERIAL DE APOYO</div>
+        <h1>Resumen</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="container summary">
+    <section class="card">
+      <h2 class="card__title">Actualizar resumen</h2>
+      <p class="muted">Carga un archivo de <strong>Word (.docx)</strong> para reemplazar el resumen.</p>
+      <p class="muted">Tip: usa títulos y viñetas para conservar el formato.</p>
+
+      <div class="grid grid--import">
+        <label class="field">
+          <span class="field__label">Archivo (Word .docx)</span>
+          <input class="field__input" type="file" id="summaryFile" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        </label>
+
+        <button class="btn btn--primary" type="button" id="btnSummaryImport" disabled>Actualizar resumen</button>
+      </div>
+      <p id="summaryImportStatus" class="muted" style="margin-top:10px"></p>
+    </section>
+
+    <div id="summaryContent">
+    <section class="card">
+      <h2 class="card__title">Idea central del bloque</h2>
+      <p>El contenido explica cómo los seres vivos se mantienen con vida desde el nivel más básico: la célula.</p>
+      <p>Los temas avanzan de forma lógica:</p>
+      <ul>
+        <li>Primero se estudia qué es una célula y cuáles son sus partes.</li>
+        <li>Después se analiza cómo obtiene energía.</li>
+        <li>Luego se revisa cómo guarda información genética en el ADN.</li>
+        <li>Finalmente se explica cómo se reproduce o divide una célula.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">Sobre el “desarrollo de personajes”</h2>
+      <p>En este material no hay personajes como en una historia o novela.</p>
+      <p>
+        El desarrollo importante no es narrativo, sino conceptual: el alumno pasa de conocer partes aisladas de la célula
+        a comprender cómo se conectan para sostener la vida.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">1. Estructura y función de la célula</h2>
+      <h3>Concepto clave</h3>
+      <ul>
+        <li>La célula es la unidad básica de los seres vivos.</li>
+        <li>Todo organismo vivo está formado por una o más células.</li>
+        <li>Las células no son solo “partes pequeñas”; son sistemas completos que realizan funciones vitales.</li>
+      </ul>
+
+      <h3>Lo que explica el video</h3>
+      <p>El video muestra contenidos relacionados con:</p>
+      <ul>
+        <li>Membrana celular.</li>
+        <li>Núcleo.</li>
+        <li>Mitocondria.</li>
+        <li>Retículo endoplasmático rugoso y liso.</li>
+        <li>Ribosomas.</li>
+        <li>División celular.</li>
+        <li>ADN y cariotipo.</li>
+      </ul>
+      <p>También se observa una explicación de la mitocondria como organelo encargado de producir energía en forma de ATP.</p>
+
+      <h3>Ideas principales</h3>
+      <ul>
+        <li>La membrana celular regula qué entra y qué sale de la célula.</li>
+        <li>El núcleo contiene el ADN y dirige muchas actividades celulares.</li>
+        <li>Las mitocondrias producen energía para que la célula funcione.</li>
+        <li>Los ribosomas fabrican proteínas.</li>
+        <li>El retículo endoplasmático rugoso participa en la producción y transporte de proteínas.</li>
+        <li>El retículo endoplasmático liso participa en la producción de lípidos y en procesos de desintoxicación.</li>
+      </ul>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>El alumno debe comprender que cada organelo tiene una función específica, pero todos trabajan juntos para que la célula viva.</p>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">2. Tipos de células</h2>
+      <h3>Concepto clave</h3>
+      <ul>
+        <li>No todas las células son iguales.</li>
+        <li>Existen células procariotas y eucariotas.</li>
+        <li>También se comparan células animales y vegetales.</li>
+      </ul>
+
+      <h3>Contenido de las ligas</h3>
+      <p>Una de las ligas de YouTube corresponde al tema de los tipos de células, sus características, partes y funciones.</p>
+
+      <h3>Ideas principales</h3>
+      <ul>
+        <li>Las células procariotas, como las bacterias, no tienen núcleo definido.</li>
+        <li>Las células eucariotas sí tienen núcleo y organelos especializados.</li>
+        <li>Las células animales y vegetales son eucariotas.</li>
+      </ul>
+      <p>La célula vegetal tiene estructuras especiales:</p>
+      <ul>
+        <li>Pared celular.</li>
+        <li>Cloroplastos.</li>
+        <li>Vacuola central grande.</li>
+      </ul>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>
+        El alumno debe poder identificar una célula vegetal si observa cloroplastos, pared celular y gran vacuola.
+        También debe saber que una bacteria no tiene núcleo definido.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">3. Fotosíntesis</h2>
+      <h3>Concepto clave</h3>
+      <p>
+        La fotosíntesis es el proceso por el cual plantas, algas y algunas bacterias fabrican su propio alimento. En este
+        proceso usan luz solar, agua y dióxido de carbono para producir glucosa y oxígeno.
+      </p>
+
+      <h3>Contenido de Generation Genius</h3>
+      <p>
+        Generation Genius explica que la fotosíntesis combina dióxido de carbono y agua usando energía del sol para producir azúcar y oxígeno. También señala que plantas, algas y cianobacterias realizan este proceso para fabricar alimento.
+      </p>
+
+      <h3>Contenido de HHMI BioInteractive</h3>
+      <p>
+        HHMI BioInteractive presenta una serie de animaciones sobre fotosíntesis y las estructuras que participan en ella.
+        El recurso organiza el tema en secciones como introducción, proceso químico, estructura de la hoja, cloroplastos,
+        reacciones luminosas, ciclo de Calvin y biosíntesis.
+      </p>
+
+      <h3>Ideas principales</h3>
+      <ul>
+        <li>La fotosíntesis ocurre principalmente en los cloroplastos.</li>
+        <li>La clorofila permite captar la energía de la luz.</li>
+        <li>La glucosa producida sirve como alimento o reserva de energía.</li>
+        <li>El oxígeno liberado es importante para muchos seres vivos.</li>
+      </ul>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>
+        El alumno debe entender que las plantas no “comen” como los animales; producen su propio alimento usando materia
+        del ambiente y energía solar.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">4. Respiración celular</h2>
+      <h3>Concepto clave</h3>
+      <ul>
+        <li>La respiración celular es el proceso por el cual las células obtienen energía a partir de la glucosa.</li>
+        <li>Utiliza principalmente glucosa y oxígeno.</li>
+        <li>Produce energía, dióxido de carbono y agua.</li>
+      </ul>
+
+      <h3>Contenido de las ligas</h3>
+      <p>
+        Generation Genius explica que la respiración celular permite descomponer energía almacenada para que el organismo
+        pueda usarla para sobrevivir.
+      </p>
+
+      <h3>Ideas principales</h3>
+      <ul>
+        <li>La respiración celular ocurre en todos los seres vivos.</li>
+        <li>En células eucariotas, gran parte del proceso ocurre en las mitocondrias.</li>
+        <li>Las plantas también realizan respiración celular, no solo fotosíntesis.</li>
+        <li>
+          Durante la noche, cuando no hay luz para fotosíntesis, las plantas siguen necesitando energía mediante
+          respiración celular.
+        </li>
+      </ul>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>El alumno debe distinguir entre:</p>
+      <ul>
+        <li>Fotosíntesis: fabrica glucosa y libera oxígeno.</li>
+        <li>Respiración celular: usa glucosa y oxígeno para obtener energía.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">5. Relación entre fotosíntesis y respiración celular</h2>
+      <h3>Concepto clave</h3>
+      <p>La fotosíntesis y la respiración celular son procesos conectados. Lo que produce uno puede ser usado por el otro.</p>
+
+      <h3>Relación principal</h3>
+      <ul>
+        <li>La fotosíntesis produce: glucosa y oxígeno.</li>
+        <li>La respiración celular usa: glucosa y oxígeno.</li>
+        <li>La respiración celular produce: dióxido de carbono y agua.</li>
+        <li>La fotosíntesis usa: dióxido de carbono y agua.</li>
+      </ul>
+
+      <h3>Idea profunda</h3>
+      <p>Estos procesos muestran que la vida funciona como un ciclo:</p>
+      <ul>
+        <li>Las plantas capturan energía solar.</li>
+        <li>Esa energía queda almacenada en la glucosa.</li>
+        <li>Los seres vivos usan esa glucosa para obtener energía.</li>
+        <li>Los residuos de un proceso pueden servir como materia prima para el otro.</li>
+      </ul>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>El alumno debe comprender que la energía y la materia se transforman, no aparecen de la nada.</p>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">6. Energía celular y ecosistemas acuáticos</h2>
+      <h3>Concepto clave</h3>
+      <p>
+        El simulador de Biology Simulations permite observar cómo cambian los niveles de oxígeno en un ambiente acuático.
+        Sirve como laboratorio virtual para estudiar fotosíntesis, respiración celular y productividad primaria.
+      </p>
+
+      <h3>Variables que se pueden modificar</h3>
+      <ul>
+        <li>Número de peces.</li>
+        <li>Número de plantas.</li>
+        <li>Intensidad de luz.</li>
+        <li>Color de luz.</li>
+        <li>Temperatura.</li>
+      </ul>
+
+      <h3>Ideas principales del simulador</h3>
+      <ul>
+        <li>Los peces realizan respiración celular: consumen oxígeno y liberan dióxido de carbono.</li>
+        <li>Las plantas realizan fotosíntesis cuando hay luz: consumen dióxido de carbono y liberan oxígeno.</li>
+        <li>Las plantas también realizan respiración celular.</li>
+        <li>Si hay muchos peces y pocas plantas, puede bajar el oxígeno disponible.</li>
+        <li>Si hay suficiente luz y plantas, puede aumentar el oxígeno en el sistema.</li>
+      </ul>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>
+        El alumno debe entender que los ecosistemas dependen del equilibrio entre productores, consumidores, luz, gases y
+        temperatura.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">7. ADN, genes y cromosomas</h2>
+      <h3>Concepto clave</h3>
+      <p>El ADN contiene la información hereditaria de los seres vivos. Esta información se organiza en genes y cromosomas.</p>
+
+      <h3>Lo que se observa en el video</h3>
+      <ul>
+        <li>El video incluye una sección sobre cuánto mide el ADN dentro de las células.</li>
+        <li>También aparece una explicación sobre cómo se organiza un cariotipo.</li>
+        <li>Se muestran cromosomas autosómicos y cromosomas sexuales.</li>
+      </ul>
+
+      <h3>Ideas principales</h3>
+      <ul>
+        <li>El ADN tiene forma de doble hélice.</li>
+        <li>Un gen es un segmento de ADN con instrucciones para una característica o función.</li>
+        <li>Un cromosoma es ADN organizado y compactado.</li>
+        <li>En los seres humanos, la mayoría de las células del cuerpo tienen 46 cromosomas, organizados en 23 pares.</li>
+        <li>Los gametos, como óvulos y espermatozoides, tienen 23 cromosomas.</li>
+      </ul>
+
+      <h3>Relación clave</h3>
+      <p>ADN → genes → cromosomas → núcleo celular.</p>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>
+        El alumno debe comprender que las características de los seres vivos se relacionan con la información genética
+        contenida en el ADN.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">8. Cariotipo</h2>
+      <h3>Concepto clave</h3>
+      <p>Un cariotipo es una representación ordenada de los cromosomas de una célula.</p>
+
+      <h3>Lo que explica el video</h3>
+      <p>El video muestra cómo se organizan los cromosomas en:</p>
+      <ul>
+        <li>Autosomas.</li>
+        <li>Cromosomas sexuales.</li>
+      </ul>
+      <p>También se observa que los cromosomas humanos se organizan en pares.</p>
+
+      <h3>Ideas principales</h3>
+      <ul>
+        <li>El cariotipo permite observar: número de cromosomas, tamaño, forma y organización por pares.</li>
+        <li>En humanos, hay 22 pares de autosomas y 1 par de cromosomas sexuales.</li>
+      </ul>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>El alumno debe saber que el cariotipo ayuda a estudiar la información cromosómica de un organismo.</p>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">9. División celular: mitosis y meiosis</h2>
+      <h3>Concepto clave</h3>
+      <p>Las células se dividen para crecer, reparar tejidos o formar células sexuales.</p>
+
+      <h3>Lo que se observa en el video</h3>
+      <ul>
+        <li>El video incluye una sección de división celular.</li>
+        <li>El tema se conecta con genética porque antes de dividirse, la célula debe duplicar su ADN.</li>
+      </ul>
+
+      <h3>Mitosis</h3>
+      <ul>
+        <li>Produce dos células hijas iguales.</li>
+        <li>Mantiene el mismo número de cromosomas.</li>
+        <li>Sirve para: crecimiento, reparación de tejidos y reemplazo de células.</li>
+      </ul>
+
+      <h3>Meiosis</h3>
+      <ul>
+        <li>Produce células sexuales.</li>
+        <li>Reduce a la mitad el número de cromosomas.</li>
+        <li>Genera variación genética.</li>
+        <li>En humanos produce gametos con 23 cromosomas.</li>
+      </ul>
+
+      <h3>Aprendizaje esperado</h3>
+      <p>El alumno debe diferenciar:</p>
+      <ul>
+        <li>Mitosis: crecimiento y reparación.</li>
+        <li>Meiosis: reproducción sexual y variación genética.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="card__title">Conclusión educativa</h2>
+      <p>El contenido de las ligas y el video se enfoca en explicar cómo funciona la vida desde el nivel celular.</p>
+      <p>
+        La célula aparece como el punto de partida: tiene estructuras especializadas, usa energía, guarda información
+        genética y puede dividirse.
+      </p>
+      <ul>
+        <li>La fotosíntesis y la respiración celular explican cómo se transforma la energía.</li>
+        <li>El ADN, los genes y los cromosomas explican cómo se transmite la información hereditaria.</li>
+        <li>La mitosis y la meiosis explican cómo las células permiten crecimiento, reparación y reproducción.</li>
+      </ul>
+      <p>En conjunto, el bloque enseña que estar vivo depende de cuatro ideas conectadas:</p>
+      <ul>
+        <li>Tener células.</li>
+        <li>Obtener y transformar energía.</li>
+        <li>Guardar información genética.</li>
+        <li>Reproducir o dividir células correctamente.</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn--primary" href="/" title="Volver al examen">Volver al examen</a>
+      </div>
+    </section>
+    </div>
+  </main>
+</body>
+</html>
